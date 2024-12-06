@@ -9,8 +9,12 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
-@AllArgsConstructor
 public class Subscription {
-    private HostingType hostingType;
-    private String uri;
+     String id;
+
+     String userId;
+
+     HostingType hostingType;
+
+     String uri;
 }

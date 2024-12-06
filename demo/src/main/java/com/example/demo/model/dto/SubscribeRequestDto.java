@@ -11,7 +11,6 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 public class SubscribeRequestDto {
-    String login;
-    HostingType hostingType;
+    String userId;
     String uri;
 }
