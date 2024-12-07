@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface SubscribeService {
     HostingType getHostingType();
+
     void subscribe(SubscribeRequestDto subscribeRequestDto);
+
     List<Subscription> getUserSubscriptions(String username);
 }

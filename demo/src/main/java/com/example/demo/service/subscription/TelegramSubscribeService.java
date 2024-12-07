@@ -30,14 +30,10 @@ public class TelegramSubscribeService implements SubscribeService {
         subscription.setUri(subscribeRequestDto.getUri());
         subscription.setUserId(subscribeRequestDto.getUserId());
         subscriptionRepository.save(subscription);
-
-        //Здесь можно и нужно сделать связку user и subscription,
-        // то есть при добавлении новой подписки, проверять существует ли такой пользователь и
-        // уже ему добавлять в лист эту подписку
     }
 
     @Override
-    public List<Subscription> getUserSubscriptions(String username) {
-        return subscriptionRepository.findByUserId(username);
+    public List<Subscription> getUserSubscriptions(String userId) {
+        return subscriptionRepository.findByUserIdAndHostingType(userId, getHostingType());
     }
 }

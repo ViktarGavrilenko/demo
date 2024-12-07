@@ -34,6 +34,6 @@ public class YouTubeSubscribeService implements SubscribeService {
 
     @Override
     public List<Subscription> getUserSubscriptions(String username) {
-       return subscriptionRepository.findByUserId(username);
+       return subscriptionRepository.findByUserIdAndHostingType(username, getHostingType());
     }
 }

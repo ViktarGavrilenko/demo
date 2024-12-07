@@ -1,5 +1,6 @@
 package com.example.demo.model.repository;
 
+import com.example.demo.model.entity.HostingType;
 import com.example.demo.model.entity.Subscription;
 import org.springframework.stereotype.Repository;
 
@@ -32,9 +33,10 @@ public class SubscriptionRepository {
         subscriptionMap.remove(id);
     }
 
-    public List<Subscription> findByUserId(String userId) {
+    public List<Subscription> findByUserIdAndHostingType(String userId, HostingType hostingType) {
         return subscriptionMap.values().stream()
                 .filter(subscription -> subscription.getUserId().equals(userId))
+                .filter(subscription -> subscription.getHostingType().equals(hostingType))
                 .collect(Collectors.toList());
     }
 }
