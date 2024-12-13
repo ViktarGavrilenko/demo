@@ -1,7 +1,5 @@
 package com.example.demo.web.exception;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
@@ -15,10 +13,21 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalExceptionHandler {
+    @ExceptionHandler(UserNoFoundException.class)
+    public ErrorInfo handlerUserNotFoundException(UserNoFoundException e) {
+        log.error(e.getMessage(), e);
+        return new ErrorInfo(e.getMessage(), HttpStatus.BAD_REQUEST.value());
+    }
+
+    @ExceptionHandler(NotValidAmountException.class)
+    public ErrorInfo handlerNotValidAmountException(NotValidAmountException e) {
+        log.error(e.getMessage(), e);
+        return new ErrorInfo(e.getMessage(), HttpStatus.BAD_REQUEST.value());
+    }
+
     @ExceptionHandler(Exception.class)
-    public ErrorInfo applicationError(HttpServletRequest req, HttpServletResponse resp, Exception e) {
+    public ErrorInfo applicationError(Exception e) {
         log.error(e.getMessage(), e);
         return new ErrorInfo(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
-
 }

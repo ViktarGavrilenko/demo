@@ -18,4 +18,9 @@ public class User {
     String username;
 
     List<Subscription> subscriptions = new ArrayList<>();
+
+    StatusUser statusUser;
+
+    double bankAccount;
+
 }

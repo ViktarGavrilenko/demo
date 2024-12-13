@@ -1,8 +1,8 @@
 package com.example.demo.model.repository;
 
-import com.example.demo.model.entity.HostingType;
-import com.example.demo.model.entity.Subscription;
+import com.example.demo.model.entity.StatusUser;
 import com.example.demo.model.entity.User;
+import com.example.demo.web.exception.UserNoFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import static com.example.demo.ulits.ConstantMessages.USER_NOT_FOUND;
 
 @Repository
 public class UserRepository {
@@ -28,7 +30,10 @@ public class UserRepository {
         return user;
     }
 
-    public void deleteById(String id) {
-        userMap.remove(id);
+    public User findByIdAndStatus(String id, StatusUser statusUser) {
+        return findById(id).filter(user -> user.getStatusUser() == statusUser)
+                .stream().findFirst()
+                .orElseThrow(() -> new UserNoFoundException(USER_NOT_FOUND));
     }
+
 }

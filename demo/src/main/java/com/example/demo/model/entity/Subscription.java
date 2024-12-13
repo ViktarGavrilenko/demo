@@ -12,9 +12,11 @@ import lombok.experimental.FieldDefaults;
 public class Subscription {
      String id;
 
-     String userId;
+     User user;
 
      HostingType hostingType;
 
      String uri;
+
+     double price;
 }

@@ -35,9 +35,8 @@ public class SubscriptionRepository {
 
     public List<Subscription> findByUserIdAndHostingType(String userId, HostingType hostingType) {
         return subscriptionMap.values().stream()
-                .filter(subscription -> subscription.getUserId().equals(userId))
+                .filter(subscription -> subscription.getUser().getId().equals(userId))
                 .filter(subscription -> subscription.getHostingType().equals(hostingType))
                 .collect(Collectors.toList());
     }
 }
-
