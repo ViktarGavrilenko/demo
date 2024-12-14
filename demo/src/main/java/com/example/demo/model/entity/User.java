@@ -23,4 +23,7 @@ public class User {
 
     double bankAccount;
 
+    public User(String id) {
+        this.id = id;
+    }
 }

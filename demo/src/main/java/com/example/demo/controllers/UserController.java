@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,8 +33,13 @@ public class UserController {
     }
 
     @PatchMapping("/{user_id}")
-    public ResponseEntity<?> updateUser(@RequestBody UserDto userDto, @PathVariable("user_id") String userId) {
-        return ResponseEntity.ok(userService.updateUser(userDto, userId));
+    public ResponseEntity<?> patchUser(@RequestBody UserDto userDto, @PathVariable("user_id") String userId) {
+        return ResponseEntity.ok(userService.patchUser(userDto, userId));
+    }
+
+    @PutMapping("/{user_id}")
+    public ResponseEntity<?> putUser(@RequestBody UserDto userDto, @PathVariable("user_id") String userId) {
+        return ResponseEntity.ok(userService.putUser(userDto, userId));
     }
 
     @DeleteMapping("/{user_id}")
@@ -42,18 +47,4 @@ public class UserController {
         userService.deleteUser(userId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
-    // в отдельный контроллер
-    @PostMapping("/replenishment/{user_id}")
-    public ResponseEntity<?> replenishmentBalance(@PathVariable("user_id") String userId, @RequestParam("amount") double amount) {
-        userService.replenishmentBalance(userId, amount);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
-    @PostMapping("/withdrawal/{user_id}")
-    public ResponseEntity<?> withdrawalBalance(@PathVariable("user_id") String userId, @RequestParam("amount") double amount) {
-        userService.withdrawalBalance(userId, amount);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
 }

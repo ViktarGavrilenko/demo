@@ -30,10 +30,13 @@ public class UserRepository {
         return user;
     }
 
-    public User findByIdAndStatus(String id, StatusUser statusUser) {
+    public Optional<User> findByIdAndStatus(String id, StatusUser statusUser) {
         return findById(id).filter(user -> user.getStatusUser() == statusUser)
-                .stream().findFirst()
-                .orElseThrow(() -> new UserNoFoundException(USER_NOT_FOUND));
+                .stream().findFirst();
     }
 
+    public void deleteById(String id) {
+        findById(id).orElseThrow(() -> new UserNoFoundException(USER_NOT_FOUND))
+                .setStatusUser(StatusUser.BLOCKED);
+    }
 }

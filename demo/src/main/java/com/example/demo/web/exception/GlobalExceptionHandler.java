@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NotValidAmountException.class)
     public ErrorInfo handlerNotValidAmountException(NotValidAmountException e) {
         log.error(e.getMessage(), e);
-        return new ErrorInfo(e.getMessage(), HttpStatus.BAD_REQUEST.value());
+        return new ErrorInfo(e.getMessage(), e.getHttpStatus().value());
     }
 
     @ExceptionHandler(Exception.class)

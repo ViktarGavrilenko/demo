@@ -1,7 +1,5 @@
 package com.example.demo.model.dto;
 
-import com.example.demo.model.entity.HostingType;
-import com.example.demo.model.entity.Subscription;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,4 +11,5 @@ import lombok.experimental.FieldDefaults;
 public class SubscribeRequestDto {
     String userId;
     String uri;
+    double price;
 }
